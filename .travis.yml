@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run lftconcept/docker-simple-frontend npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-2"
+  app: "dockersimplefrontend"
+  env: "dockersimplefrontend-env"
+  bucket_name: "elasticbeanstalk-eu-west-2-132884005771"
+  bucket_path: "dockersimplefrontend"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
